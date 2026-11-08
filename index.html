@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#392b49">
+  <title>FishBuy spreadsheet – kategorier, storlekar och köpguide</title>
+  <meta name="description" content="Utforska FishBuy spreadsheet med en svensk guide till sneakers, kläder och accessoarer. Jämför mått, granska produktbilder och planera din totalkostnad.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sv_SE">
+  <meta property="og:title" content="FishBuy spreadsheet – hitta din stil med bättre underlag">
+  <meta property="og:description" content="Tio kategorier och konkreta råd om passform, produktbilder och totalkostnad. En fristående guide på svenska.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FishBuy spreadsheet – svensk köpguide">
+  <meta name="twitter:description" content="Börja med en kategori. Kontrollera detaljerna. Jämför hela kostnaden.">
+  <link rel="preconnect" href="https://static.nike.com" crossorigin>
+  <link rel="dns-prefetch" href="https://assets.christiandior.com">
+  <!--
+    Filnamn: index.html.
+    Sökunderlag: sökningar efter FishBuy spreadsheet och relaterade begrepp.
+    Bings resultatsida kunde inte läsas direkt; dess första tio placeringar
+    har därför inte verifierats. Inga sådana placeringar påstås på sidan.
+    FishBuy och FishGoo behandlas inte som samma tjänst.
+    Lägg till en självrefererande canonical när sidans publiceringsadress är känd.
+    Sekundära teman: FishBuy finds, FishBuy storleksguide,
+    FishBuy QC-guide, FishBuy fraktkostnad.
+  -->
+  <style>
+    :root{
+      --paper:#f7f3eb;
+      --white:#fffdf9;
+      --ink:#29232e;
+      --purple:#392b49;
+      --muted:#675f6b;
+      --line:#dcd4df;
+      --lavender:#e9e0f0;
+      --yellow:#efdc91;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;background:var(--paper);color:var(--ink);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.65;-webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-underline-offset:4px}
+    a:focus-visible,summary:focus-visible{
+      outline:3px solid #7656a2;outline-offset:5px;
+    }
+    img{display:block;max-width:100%;height:auto}
+    h1,h2,h3,p,figure{margin:0}
+    h1,h2,h3{line-height:1.12;letter-spacing:-.04em}
+    h1{font-size:clamp(2.8rem,6vw,5.5rem);max-width:850px}
+    h2{font-size:clamp(1.9rem,3.7vw,3rem)}
+    h3{font-size:1.35rem}
+    p+p{margin-top:1rem}
+    .wrap{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+    .eyebrow{
+      font-size:.74rem;font-weight:750;letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .muted{color:var(--muted)}
+    .masthead{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:24px;padding-block:24px;border-bottom:1px solid var(--line);
+    }
+    .logo{font-size:1.35rem;font-weight:850;letter-spacing:-.05em;text-decoration:none}
+    .masthead small{font-size:.78rem;color:var(--muted)}
+    .masthead .edition{display:flex;align-items:center;gap:10px}
+    .dot{width:8px;height:8px;background:#7a638f;border-radius:50%}
+    .intro{padding:43px 0 28px}
+    .intro .eyebrow{color:#70557d;margin-bottom:18px}
+    .lead{max-width:740px;font-size:1.12rem;margin-top:22px;color:var(--muted)}
+    .category-panel{
+      margin:8px 0 35px;padding:24px;background:var(--purple);
+      color:white;border-radius:var(--radius);
+    }
+    .category-heading{
+      display:flex;justify-content:space-between;gap:12px;
+      align-items:baseline;margin-bottom:16px;
+    }
+    .category-heading h2{font-size:1.1rem;letter-spacing:0}
+    .category-heading span{font-size:.78rem;color:#ddd1e7}
+    .categories{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .categories a{
+      display:flex;align-items:center;justify-content:space-between;gap:8px;
+      min-height:53px;padding:12px;border:1px solid #766681;border-radius:9px;
+      font-size:.82rem;text-decoration:none;
+    }
+    .categories a::after{content:"↗";color:var(--yellow)}
+    .categories a:hover{background:#554063;border-color:#c4abd7}
+    .feature{
+      display:grid;grid-template-columns:1.08fr .92fr;
+      min-height:420px;border:1px solid var(--line);
+      border-radius:var(--radius);overflow:hidden;background:var(--white);
+    }
+    .feature-copy{
+      display:flex;flex-direction:column;justify-content:center;
+      padding:clamp(24px,4vw,48px);
+    }
+    .feature-copy h2{margin:18px 0}
+    .feature-copy p{color:var(--muted);max-width:450px}
+    .button{
+      display:inline-flex;justify-content:center;align-items:center;
+      gap:18px;align-self:flex-start;margin-top:25px;
+      padding:13px 21px;background:var(--purple);color:white;
+      border:1px solid var(--purple);border-radius:100px;
+      font-size:.9rem;font-weight:650;text-decoration:none;
+    }
+    .button:hover{background:#58406a}
+    .feature-visual{background:#eeedf0;display:flex;flex-direction:column}
+    .feature-visual img{width:100%;height:355px;object-fit:contain}
+    figcaption{padding:14px 20px;color:var(--muted);font-size:.77rem}
+    .mini-note{
+      display:flex;gap:20px;justify-content:space-between;
+      margin-top:18px;font-size:.8rem;color:var(--muted);
+    }
+    .section{padding-block:65px;border-bottom:1px solid var(--line)}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;
+      gap:25px;margin-bottom:28px;
+    }
+    .section-head .eyebrow{margin-bottom:12px;color:#70557d}
+    .section-head>p{max-width:330px;font-size:.9rem;color:var(--muted)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .step{border-top:2px solid var(--purple);padding-top:18px}
+    .number{font-size:.8rem;letter-spacing:.1em;color:#70557d;display:block;margin-bottom:25px}
+    .step h3{margin-bottom:14px}
+    .step p{font-size:.94rem;color:var(--muted)}
+    .editorial{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .article{padding:30px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius)}
+    .article .eyebrow{color:#70557d;margin-bottom:18px}
+    .article h3{font-size:1.65rem;margin-bottom:18px}
+    .article p,.article li{font-size:.94rem;color:var(--muted)}
+    .article ul{padding-left:20px;margin:18px 0 0}
+    .article li+li{margin-top:9px}
+    .table-scroll{overflow-x:auto;margin-top:24px}
+    table{width:100%;border-collapse:collapse;font-size:.92rem;text-align:left;min-width:540px}
+    th,td{padding:16px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{background:var(--lavender);font-weight:700}
+    td:first-child{font-weight:650;width:25%}
+    .inspiration{
+      display:grid;grid-template-columns:.8fr 1.2fr;gap:0;
+      overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);
+      background:var(--white);
+    }
+    .inspiration figure{background:#f0ede8;display:flex;flex-direction:column}
+    .inspiration img{height:365px;width:100%;object-fit:contain}
+    .inspiration-copy{padding:36px}
+    .inspiration-copy h3{font-size:1.8rem;margin:16px 0}
+    .inspiration-copy p{color:var(--muted);font-size:.95rem}
+    .label{
+      display:inline-block;padding:5px 11px;border-radius:100px;
+      background:var(--yellow);font-size:.74rem;font-weight:700;
+    }
+    .search-themes{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:30px}
+    .search-themes h3{font-size:1rem;letter-spacing:-.01em;margin-bottom:12px}
+    .search-themes ul{margin:0;padding-left:18px;font-size:.84rem;color:var(--muted)}
+    .search-themes li+li{margin-top:8px}
+    .faq-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:60px}
+    .faq-layout h2{margin:12px 0 20px}
+    details{border-bottom:1px solid var(--line);padding:19px 0}
+    details:first-child{padding-top:0}
+    summary{cursor:pointer;font-size:1rem;font-weight:650;padding-right:12px}
+    details p{padding-top:13px;color:var(--muted);font-size:.94rem}
+    .closing{
+      margin-top:45px;background:var(--lavender);padding:32px;
+      border-radius:var(--radius);display:flex;justify-content:space-between;
+      align-items:center;gap:24px;
+    }
+    .closing h2{font-size:1.7rem}
+    .closing p{font-size:.9rem;color:var(--muted);margin-top:10px}
+    .closing .button{margin:0;flex-shrink:0}
+    footer{padding-block:32px 45px}
+    .footer-top{display:flex;justify-content:space-between;gap:20px;margin-bottom:18px}
+    footer p{font-size:.77rem;max-width:850px;color:var(--muted)}
+    @media(min-width:900px){
+      .section{content-visibility:auto;contain-intrinsic-size:auto 550px}
+    }
+    @media(max-width:900px){
+      .categories{grid-template-columns:repeat(3,1fr)}
+      .feature{grid-template-columns:1fr 1fr}
+      .feature-visual img{height:330px}
+      .search-themes{grid-template-columns:repeat(2,1fr)}
+      .faq-layout{gap:30px}
+    }
+    @media(max-width:640px){
+      .wrap{width:calc(100% - 32px)}
+      .masthead{padding-block:18px}
+      .masthead small{font-size:.7rem}
+      .intro{padding-top:32px}
+      .lead{font-size:1rem}
+      .category-panel{padding:18px;margin-bottom:24px}
+      .category-heading{align-items:start}
+      .category-heading span{max-width:110px;text-align:right}
+      .categories{grid-template-columns:repeat(2,1fr)}
+      .categories a{font-size:.76rem;min-height:51px}
+      .feature{grid-template-columns:1fr}
+      .feature-copy{padding:28px}
+      .feature-visual img{height:290px}
+      .mini-note{flex-direction:column;gap:5px}
+      .section{padding-block:42px}
+      .section-head{display:block}
+      .section-head>p{margin-top:16px}
+      .steps,.editorial,.inspiration,.faq-layout{grid-template-columns:1fr}
+      .step{padding-bottom:12px}
+      .number{margin-bottom:12px}
+      .article{padding:24px}
+      .inspiration img{height:295px}
+      .inspiration-copy{padding:26px}
+      .search-themes{gap:24px 15px}
+      .closing{align-items:start;flex-direction:column;padding:25px}
+      .footer-top{flex-direction:column;gap:6px}
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebPage",
+        "@id":"#webpage",
+        "name":"FishBuy spreadsheet – kategorier, storlekar och köpguide",
+        "inLanguage":"sv",
+        "description":"En fristående svensk guide till produktjämförelse, storlekar, QC-bilder och totalkostnad, med kategorilänkar till CAFANS.",
+        "mainEntity":{"@id":"#guide"}
+      },
+      {
+        "@type":"Article",
+        "@id":"#guide",
+        "headline":"FishBuy spreadsheet: från produktidé till genomtänkt jämförelse",
+        "inLanguage":"sv",
+        "description":"Börja med en kategori, granska mått och produktbilder och räkna på hela kostnaden före beställning.",
+        "articleSection":[
+          "Kategorier",
+          "Storleksguide",
+          "QC-guide",
+          "Fraktkostnad",
+          "Sökidéer"
+        ],
+        "isPartOf":{"@id":"#webpage"}
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"#faq",
+        "inLanguage":"sv",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"Vad betyder FishBuy spreadsheet?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Sökfrasen används för att leta efter organiserade produktlänkar och jämförelseunderlag med anknytning till namnet FishBuy. Den här sidan är en fristående svensk guide med kategorilänkar till CAFANS, inte ett officiellt FishBuy-kalkylark."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Vart leder sidans länkar?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Kategorilänkarna öppnar respektive kategori på cafans.com. Övriga länkar leder till https://www.cafans.com. Ingen beställning genomförs på den här sidan."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Hur väljer jag rätt storlek?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Jämför produktens måttabell med ett plagg eller ett par skor som passar dig. Kontrollera hur måtten har tagits och om skomåttet avser fotlängd eller innermått. Utgå inte enbart från S, M, L eller ett EU-nummer."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Kan QC-bilder bevisa att en vara är äkta?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Nej. QC-bilder kan visa synliga detaljer som sömmar, färg, form och märkning, men de bevisar inte äkthet eller långvarig hållbarhet. För en äkthetsbedömning behövs ytterligare dokumentation och relevant sakkunskap."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Vad ingår i den totala kostnaden till Sverige?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Räkna med varupriset och eventuella kostnader för lokal frakt, tjänster, internationell frakt, betalning och valutaväxling. Kontrollera också vilka importavgifter och vilken moms som gäller för din beställning och vad som redan ingår i kassan."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Är FishBuy och FishGoo samma namn?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Namnen är olika och ska inte automatiskt behandlas som samma tjänst. Kontrollera stavning, domän och mottagare innan du registrerar ett konto eller betalar."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/uahuj/">
+</head>
+<body>
+  <header class="wrap masthead">
+    <a class="logo" href="https://www.cafans.com" aria-label="Besök www.cafans.com">www.cafans.com</a>
+    <div class="edition"><span class="dot" aria-hidden="true"></span><small>STIL &amp; KÖPKUNSKAP · SVENSKA</small></div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">En bättre start för din nästa jämförelse</p>
+      <h1 id="page-title"><span lang="en">FishBuy spreadsheet</span><br>Stil börjar med detaljer.</h1>
+      <p class="lead">Börja med rätt kategori, jämför det som faktiskt går att kontrollera och ge varje val lite mer eftertanke. Här får du en svensk guide till sneakers, kläder och accessoarer, med vägar vidare till CAFANS.</p>
+    </section>
+
+    <nav class="category-panel" aria-label="Produktkategorier på CAFANS">
+      <div class="category-heading">
+        <h2>Välj din utgångspunkt</h2>
+        <span>10 kategorier på CAFANS</span>
+      </div>
+      <div class="categories">
+        <a href="https://cafans.com/category-911-Shoes.html"><span lang="en">Shoes</span></a>
+        <a href="https://cafans.com/category-912-Hoodies%2FSweaters.html"><span lang="en">Hoodies/Sweaters</span></a>
+        <a href="https://cafans.com/category-913-T-Shirts.html"><span lang="en">T-Shirts</span></a>
+        <a href="https://cafans.com/category-914-Jackets.html"><span lang="en">Jackets</span></a>
+        <a href="https://cafans.com/category-915-Pants%2FShorts.html"><span lang="en">Pants/Shorts</span></a>
+        <a href="https://cafans.com/category-916-Headwear.html"><span lang="en">Headwear</span></a>
+        <a href="https://cafans.com/category-917-Sets.html"><span lang="en">Sets</span></a>
+        <a href="https://cafans.com/category-918-underwear%2Funderpants.html"><span lang="en">Underwear/underpants</span></a>
+        <a href="https://cafans.com/category-919-Jersey.html"><span lang="en">Jersey</span></a>
+        <a href="https://cafans.com/category-920-Accessories.html"><span lang="en">Accessories</span></a>
+      </div>
+    </nav>
+
+    <section class="feature" aria-labelledby="feature-title">
+      <div class="feature-copy">
+        <p class="eyebrow">01 / Silhuett &amp; passform</p>
+        <h2 id="feature-title">Börja med formen.<br>Fortsätt med måtten.</h2>
+        <p>En ren sneaker kan vara basen i en hel garderob. Titta på tåparti, sulprofil och proportioner, men kontrollera också storleksunderlaget för den exakta modellen.</p>
+        <a class="button" href="https://www.cafans.com">Utforska CAFANS <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="feature-visual">
+        <img
+          src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,q_auto:eco/e6da41fa-1be4-4ce5-b89c-22be4f1f02d4/AIR+FORCE+1+%2707.png"
+          width="864" height="1080"
+          alt="Vit Nike Air Force 1 '07 med vit sula och perforerat tåparti"
+          loading="eager" fetchpriority="high" decoding="async">
+        <figcaption>Nike Air Force 1 ’07 · bildreferens för form och proportioner, inte ett lagerbesked.</figcaption>
+      </figure>
+    </section>
+
+    <div class="mini-note">
+      <span>Fristående guide · inga verifierade produktomdömen eller lagerlöften.</span>
+      <span>Bildexempel visar inte vad som ingår i en beställning.</span>
+    </div>
+
+    <section class="section" aria-labelledby="method-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Från sökning till urval</p>
+          <h2 id="method-title">Tre frågor före nästa klick.</h2>
+        </div>
+        <p>Ett användbart jämförelseunderlag hjälper dig att skilja ett snyggt foto från en tillräckligt tydlig produktbeskrivning.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <span class="number">01 — VAD SÖKER DU?</span>
+          <h3>Gör önskemålet konkret.</h3>
+          <p>För <span lang="en">FishBuy finds</span> blir sökningen tydligare när du börjar med produkt, färg och passform. ”Vit låg sneaker” eller ”hoodie med dragkedja” ger ett bättre underlag än enbart ett varumärkesnamn.</p>
+        </article>
+        <article class="step">
+          <span class="number">02 — VAD KAN DU KONTROLLERA?</span>
+          <h3>Öppna detaljerna.</h3>
+          <p>Läs material, mått, modellreferens och valbara alternativ. Kontrollera om bilderna gäller just den färg och storlek du har valt. Spara ursprungslänken så att du kan hitta tillbaka.</p>
+        </article>
+        <article class="step">
+          <span class="number">03 — VAD BLIR HELHETEN?</span>
+          <h3>Räkna efter före köp.</h3>
+          <p>Jämför slutkostnad och villkor, inte bara varupriset. Frakt, betalningsavgifter och eventuella importkostnader kan påverka vilken produkt som passar din budget.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guides-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Två korta guider</p>
+          <h2 id="guides-title">Passform möter bildgranskning.</h2>
+        </div>
+        <p>Anteckna sådant som hjälper dig att jämföra samma egenskap mellan flera alternativ.</p>
+      </div>
+      <div class="editorial">
+        <article class="article">
+          <p class="eyebrow">FishBuy storleksguide</p>
+          <h3>Mått säger mer än storleksbokstäver.</h3>
+          <p>Lägg ett plagg som passar på en plan yta. Mät det på samma sätt som i säljarens tabell. Skilj mellan kroppsmått och färdiga plaggmått; de beskriver olika saker.</p>
+          <ul>
+            <li><strong>Hoodies och T-shirts:</strong> jämför bröstvidd, längd och axelbredd.</li>
+            <li><strong>Byxor och shorts:</strong> kontrollera midja, gren och innerbenslängd.</li>
+            <li><strong>Sneakers:</strong> läs om tabellen anger fotlängd eller innermått.</li>
+            <li><strong>Kepsar och smycken:</strong> kontrollera omkrets, justering och stängning.</li>
+          </ul>
+        </article>
+        <article class="article">
+          <p class="eyebrow">FishBuy QC-guide</p>
+          <h3>Be om bilder som besvarar en fråga.</h3>
+          <p>QC betyder kvalitetskontroll. Bilder kan hjälpa dig att upptäcka synliga avvikelser, men en logotyp eller ett snyggt produktfoto är inget äkthetsbevis.</p>
+          <ul>
+            <li>Jämför båda skornas form och sömmar i samma vinkel.</li>
+            <li>Be om en närbild om en söm, etikett eller stängning är oklar.</li>
+            <li>Granska färg försiktigt; ljus och skärmar påverkar återgivningen.</li>
+            <li>Kontrollera att bilder och mått gäller det valda exemplaret.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="cost-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">FishBuy fraktkostnad</p>
+          <h2 id="cost-title">Bygg en jämförelse som håller.</h2>
+        </div>
+        <p>En enkel egen tabell räcker. Markera uppskattningar tydligt och ersätt dem när du får ett bekräftat belopp.</p>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Fält för produktjämförelse" tabindex="0">
+        <table>
+          <caption>Fält att spara i ditt eget jämförelseunderlag</caption>
+          <thead>
+            <tr><th scope="col">Fält</th><th scope="col">Anteckna</th><th scope="col">Kontrollera</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Produkt och källa</td><td>Namn, ursprungslänk och modellreferens</td><td>Att länken öppnar rätt produkt</td></tr>
+            <tr><td>Valt alternativ</td><td>Färg, storlek, material och antal</td><td>Att foto och beskrivning gäller samma variant</td></tr>
+            <tr><td>Varukostnad</td><td>Belopp, valuta och datum</td><td>Aktuellt pris för ditt val</td></tr>
+            <tr><td>Frakt och tjänster</td><td>Lokal frakt, internationell frakt och eventuella tjänsteavgifter</td><td>Vikt, paketmått och vad offerten omfattar</td></tr>
+            <tr><td>Betalning och import</td><td>Valutaväxling, betalningsavgifter och tillämpliga importkostnader</td><td>Vad som redan ingår i kassan</td></tr>
+            <tr><td>Villkor</td><td>Retur, reklamation och eventuell ersättning</td><td>Tidsgränser och vem som hanterar ärendet</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:20px;font-size:.9rem">För leverans till Sverige: kontrollera aktuella tull- och momsregler för din beställning. En fraktuppskattning är inte en garanterad slutkostnad eller leveranstid.</p>
+    </section>
+
+    <section class="section" aria-labelledby="details-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">02 / Accessoarer med eftertanke</p>
+          <h2 id="details-title">Små detaljer. Tydliga frågor.</h2>
+        </div>
+        <p>Använd varumärkesbilder som visuella referenser. Kontrollera varje faktisk produkt separat.</p>
+      </div>
+      <div class="inspiration">
+        <figure>
+          <img
+            src="https://assets.christiandior.com/is/image/diorprod/B3105WOMZID301_SBG_E01-2?wid=640&amp;hei=800&amp;qlt=75&amp;bfc=on"
+            width="640" height="800"
+            alt="Dior Clair D Lune-armband i guldfärgad metall med dekorativa hängen och kristaller"
+            loading="lazy" decoding="async">
+          <figcaption>Dior Clair D Lune · bildreferens för kedjor, hängen och stängning.</figcaption>
+        </figure>
+        <article class="inspiration-copy">
+          <span class="label">Material före antaganden</span>
+          <h3>Vad behöver du veta innan du väljer?</h3>
+          <p>För smycken: läs metallbeskrivningen och skilj en guldfärgad yta från uppgifter om metallhalt. Kontrollera längd, lås och materialinformation som är relevant för din hud.</p>
+          <p>För en Gucci-keps är omkrets och justering användbara jämförelsepunkter. För en Hermès-scarf är mått, material och skötselråd viktigare än hur den har knutits på bilden.</p>
+          <p>Vid jämförelse av Louis Vuitton-accessoarer eller Nike-plagg bör du spara den exakta modellreferensen. Varumärkesnamn ensamt beskriver varken skick, äkthet eller vad en viss säljare levererar.</p>
+          <a class="button" href="https://www.cafans.com">Fortsätt till CAFANS <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="search-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Sök mer precist</p>
+          <h2 id="search-title">Sökidéer för nästa steg.</h2>
+        </div>
+        <p>Lägg en relevant precisering till FishBuy spreadsheet. Välj det du behöver undersöka; förslagen är inga verifierade sökvolymer.</p>
+      </div>
+      <div class="search-themes">
+        <div>
+          <h3>Sneakers &amp; passform</h3>
+          <ul>
+            <li>vita sneakers med låg profil</li>
+            <li>storleksguide för sneakers</li>
+            <li>fotlängd jämfört med innermått</li>
+            <li>jämföra sulor på produktbilder</li>
+            <li>Nike modellreferens på skor</li>
+            <li>QC-bilder av sömmar på skor</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Kläder &amp; lager</h3>
+          <ul>
+            <li>hoodie med dragkedja och måttabell</li>
+            <li>T-shirt med rak passform</li>
+            <li>jacka med plats för mellanlager</li>
+            <li>byxor med angiven innerbenslängd</li>
+            <li>shorts med justerbar midja</li>
+            <li>matchande set med separata mått</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Huvudbonader &amp; detaljer</h3>
+          <ul>
+            <li>Gucci-keps med justerbar stängning</li>
+            <li>Hermès-scarf mått och material</li>
+            <li>Dior-armband längd och lås</li>
+            <li>Louis Vuitton-accessoarer modellreferens</li>
+            <li>smycken med tydlig metallbeskrivning</li>
+            <li>kepsens omkrets och passform</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Underlag &amp; kostnader</h3>
+          <ul>
+            <li>produktlänkar med rätt färgval</li>
+            <li>jämföra säljarbilder och QC-bilder</li>
+            <li>fraktberäkning med paketmått</li>
+            <li>totalkostnad för leverans till Sverige</li>
+            <li>valutaväxling och betalningsavgifter</li>
+            <li>returvillkor före beställning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-layout" aria-labelledby="faq-title">
+      <div>
+        <p class="eyebrow">Direkta svar</p>
+        <h2 id="faq-title">Vanliga frågor.</h2>
+        <p class="muted">Börja här om du vill förstå sidans syfte och vilka uppgifter du behöver kontrollera själv.</p>
+      </div>
+      <div>
+        <details open>
+          <summary>Vad betyder FishBuy spreadsheet?</summary>
+          <p>Sökfrasen används för att leta efter organiserade produktlänkar och jämförelseunderlag med anknytning till namnet FishBuy. Den här sidan är en fristående svensk guide med kategorilänkar till CAFANS, inte ett officiellt FishBuy-kalkylark.</p>
+        </details>
+        <details>
+          <summary>Vart leder sidans länkar?</summary>
+          <p>Kategorilänkarna öppnar respektive kategori på cafans.com. Övriga länkar leder till https://www.cafans.com. Ingen beställning genomförs på den här sidan.</p>
+        </details>
+        <details>
+          <summary>Hur väljer jag rätt storlek?</summary>
+          <p>Jämför produktens måttabell med ett plagg eller ett par skor som passar dig. Kontrollera hur måtten har tagits och om skomåttet avser fotlängd eller innermått. Utgå inte enbart från S, M, L eller ett EU-nummer.</p>
+        </details>
+        <details>
+          <summary>Kan QC-bilder bevisa att en vara är äkta?</summary>
+          <p>Nej. QC-bilder kan visa synliga detaljer som sömmar, färg, form och märkning, men de bevisar inte äkthet eller långvarig hållbarhet. För en äkthetsbedömning behövs ytterligare dokumentation och relevant sakkunskap.</p>
+        </details>
+        <details>
+          <summary>Vad ingår i den totala kostnaden till Sverige?</summary>
+          <p>Räkna med varupriset och eventuella kostnader för lokal frakt, tjänster, internationell frakt, betalning och valutaväxling. Kontrollera också vilka importavgifter och vilken moms som gäller för din beställning och vad som redan ingår i kassan.</p>
+        </details>
+        <details>
+          <summary>Är FishBuy och FishGoo samma namn?</summary>
+          <p>Namnen är olika och ska inte automatiskt behandlas som samma tjänst. Kontrollera stavning, domän och mottagare innan du registrerar ett konto eller betalar.</p>
+        </details>
+      </div>
+    </section>
+
+    <aside class="closing" aria-label="Fortsätt till katalogen">
+      <div>
+        <h2>Hitta något att jämföra.</h2>
+        <p>Ta med dina mått, välj en kategori och läs produktinformationen i lugn och ro.</p>
+      </div>
+      <a class="button" href="https://www.cafans.com">Öppna CAFANS <span aria-hidden="true">↗</span></a>
+    </aside>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer-top">
+      <a class="logo" href="https://www.cafans.com">www.cafans.com</a>
+      <span class="eyebrow">FishBuy spreadsheet · svensk guide</span>
+    </div>
+    <p>Fristående informationssida utan påstådd officiell koppling till FishBuy, Nike, Louis Vuitton, Gucci, Hermès eller Dior. Varumärken används för identifiering och stilreferenser. Bilder är illustrationer av referensmodeller och bekräftar inte utbud, äkthet eller tillgänglighet hos länkade säljare. Aktuella uppgifter och villkor behöver kontrolleras på respektive produkt- och beställningssida.</p>
+  </footer>
+</body>
+</html>
